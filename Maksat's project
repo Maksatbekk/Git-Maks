@@ -24,7 +24,7 @@ public class GuessingGame {
         JOptionPane.showMessageDialog(null, ""+name+"!  "+define(str, count));
     }
 
-    public static String determineGuess(int userAnswer, int computerNumber, int count, int triesLeft){
+    public static String determineGuess(int userAnswer, int computerNumber, int count){
         if (userAnswer <=0 || userAnswer >100) {
             return "Your guess is invalid";
         }
