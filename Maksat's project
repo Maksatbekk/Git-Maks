@@ -4,9 +4,10 @@ import javax.swing.*;
 
 public class GuessingGame {
     public static void main(String[] args) {
-        int computerNumber = (int) (Math.random()*100 + 1);
+        int computerNumber = (int) (Math.random()*8999 + 1000);
         int userAnswer = 0;
         int count = 1;
+        int minus = 0;
         int triesLeft = 5;
         String str = "";
         String name = JOptionPane.showInputDialog(null,
@@ -15,7 +16,7 @@ public class GuessingGame {
         while (userAnswer != computerNumber)
         {
             String response = JOptionPane.showInputDialog(null,
-                    "Enter a guess between 1 and 100", "Guessing Game", 3);
+                    "Enter a guess between 1000 and 10000", "Guessing Game", 3);
             userAnswer = Integer.parseInt(response);
             JOptionPane.showMessageDialog(null, ""+ determineGuess(userAnswer, computerNumber, count, triesLeft));
             count++;
@@ -24,30 +25,48 @@ public class GuessingGame {
         JOptionPane.showMessageDialog(null, ""+name+"!  "+define(str, count));
     }
 
-    public static String determineGuess(int userAnswer, int computerNumber, int count){
-        if (userAnswer <=0 || userAnswer >100) {
+    public static String determineGuess(int userAnswer, int computerNumber, int count, int triesLeft){
+        int plus = 0;
+        int minus = 0;
+        String n = "";
+        if (userAnswer < 1000 || userAnswer > 10000) {
             return "Your guess is invalid";
+        }else{
+            n += Guess(computerNumber, userAnswer, plus, minus);
         }
-        else if (userAnswer == computerNumber ){
-            return "Correct!\nTotal number of guesses: " + count;
-        }
-        else if (userAnswer > computerNumber ) {
-            return "Your guess is too high, try again.\nTry Number: " + count;
-        }
-        else if (userAnswer < computerNumber) {
-            return "Your guess is too low, try again.\nTry Number: " + count;
-        }
-        else {
-            return "Your guess is incorrect\nTry Number: " + count;
-        }
+        return n;
     }
     public static String define(String str, int count){
         if(count > 0 && count <= 6){
-            return "You are genius :)";
+            return "You are genius! :)";
         }else if(count > 6 && count <= 10){
             return "You are nearly genius :D";
         }else {
             return "Very bad :(";
         }
+    }
+    public static Integer Guess(int computerNumber, int userAnswer, int plus, int minus){
+        String comString = Integer.toString(computerNumber);
+        String usString = Integer.toString(userAnswer);
+        String[] comInt = new String[4];
+        String[] usInt = new String[4];
+        for (int i = 0; i < usString.length(); i++){
+            char c = comString.charAt(i);
+            comInt[i] += c;
+            char h = usString.charAt(i);
+            usInt[i] += h;
+        }
+        for (int s = 0; s < usInt.length; s++){
+            if (comInt[s] == usInt[s]){
+                plus += 1;
+            }
+        }System.out.println(plus);
+        for (int k = 0; k < 4; k++){
+            for(int j = 4-k; j >= 0; j--){
+                if (comInt[k] == usInt[j]){
+                    minus += -1;
+                }
+            }
+        }return minus;
     }
 }
