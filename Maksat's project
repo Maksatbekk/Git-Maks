@@ -1,15 +1,23 @@
-import jdk.nashorn.internal.parser.Scanner;
+package com.company;//import jdk.nashorn.internal.parser.Scanner;
 
 import javax.swing.*;
 
-public class GuessingGame {
-    public static void main(String[] args) {
+public class GuessingGame
+{
+    public static void main(String[] args)
+    {
         int computerNumber = (int) (Math.random()*8999 + 1000);
+
         int userAnswer = 0;
+
         int count = 1;
+
         int minus = 0;
-        int triesLeft = 5;
+
+        int plus = 0;
+
         String str = "";
+
         String name = JOptionPane.showInputDialog(null,
                 "Welcome to Number Guessing Game. Please Enter your name: ", "Guessing Game", 3);
 
@@ -18,25 +26,48 @@ public class GuessingGame {
             String response = JOptionPane.showInputDialog(null,
                     "Enter a guess between 1000 and 10000", "Guessing Game", 3);
             userAnswer = Integer.parseInt(response);
-            JOptionPane.showMessageDialog(null, ""+ determineGuess(userAnswer, computerNumber, count, triesLeft));
+            JOptionPane.showMessageDialog(null, ""+ determineGuess(computerNumber, userAnswer, plus, minus, str));
             count++;
-            triesLeft--;
+
         }
-        JOptionPane.showMessageDialog(null, ""+name+"!  "+define(str, count));
+
+        JOptionPane.showMessageDialog(null, ""+name+"!  "+define(count));
+
     }
 
-    public static String determineGuess(int userAnswer, int computerNumber, int count, int triesLeft){
-        int plus = 0;
-        int minus = 0;
-        String n = "";
-        if (userAnswer < 1000 || userAnswer > 10000) {
-            return "Your guess is invalid";
-        }else{
-            n += Guess(computerNumber, userAnswer, plus, minus);
+    public static String determineGuess(int computerNumber, int userAnswer, int plus, int minus, String sign) {
+        String comString = Integer.toString(computerNumber);
+        String usString = Integer.toString(userAnswer);
+        String[] comInt = new String[4];
+        String[] usInt = new String[4];
+
+        for (int i = 0; i < usString.length(); i++) {
+            char c = comString.charAt(i);
+            comInt[i] += c;
+            char h = usString.charAt(i);
+            usInt[i] += h;
         }
-        return n;
+
+        for (int s = 0; s < 4; s++) {
+            if (comInt[s] == usInt[s]) {
+                plus += 1;
+                sign += plus;
+            }
+        }//sign += "+";
+
+        for (int k = 1; k <= 4; k++) {
+            for (int j = 4 - k; j > 0; j--) {
+                if (comInt[j] == usInt[k]) {
+                    minus += -1;
+                    sign += minus;
+                }
+            }
+        }
+
+        return sign;
     }
-    public static String define(String str, int count){
+
+    public static String define(int count){
         if(count > 0 && count <= 6){
             return "You are genius! :)";
         }else if(count > 6 && count <= 10){
@@ -44,29 +75,5 @@ public class GuessingGame {
         }else {
             return "Very bad :(";
         }
-    }
-    public static Integer Guess(int computerNumber, int userAnswer, int plus, int minus){
-        String comString = Integer.toString(computerNumber);
-        String usString = Integer.toString(userAnswer);
-        String[] comInt = new String[4];
-        String[] usInt = new String[4];
-        for (int i = 0; i < usString.length(); i++){
-            char c = comString.charAt(i);
-            comInt[i] += c;
-            char h = usString.charAt(i);
-            usInt[i] += h;
-        }
-        for (int s = 0; s < usInt.length; s++){
-            if (comInt[s] == usInt[s]){
-                plus += 1;
-            }
-        }System.out.println(plus);
-        for (int k = 0; k < 4; k++){
-            for(int j = 4-k; j >= 0; j--){
-                if (comInt[k] == usInt[j]){
-                    minus += -1;
-                }
-            }
-        }return minus;
     }
 }
