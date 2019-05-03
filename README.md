@@ -1,6 +1,8 @@
 # Git-Maks
 ----Title---
+
 Maksat's first project
+
 Name of the project:
 
 "Guess the number".
