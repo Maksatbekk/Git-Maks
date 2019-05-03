@@ -2,21 +2,16 @@ package com.company;//import jdk.nashorn.internal.parser.Scanner;
 
 import javax.swing.*;
 
-public class GuessingGame
-{
-    public static void main(String[] args)
-    {
+public class GuessingGame {
+
+    private static int trynum = 0;
+    public static void main(String[] args) {
+
         int computerNumber = (int) (Math.random()*8999 + 1000);
 
         int userAnswer = 0;
 
         int count = 1;
-
-        int minus = 0;
-
-        int plus = 0;
-
-        String str = "";
 
         String name = JOptionPane.showInputDialog(null,
                 "Welcome to Number Guessing Game. Please Enter your name: ", "Guessing Game", 3);
@@ -26,7 +21,7 @@ public class GuessingGame
             String response = JOptionPane.showInputDialog(null,
                     "Enter a guess between 1000 and 10000", "Guessing Game", 3);
             userAnswer = Integer.parseInt(response);
-            JOptionPane.showMessageDialog(null, ""+ determineGuess(computerNumber, userAnswer, plus, minus, str));
+            JOptionPane.showMessageDialog(null, ""+ determineGuess(computerNumber, userAnswer));
             count++;
 
         }
@@ -35,45 +30,51 @@ public class GuessingGame
 
     }
 
-    public static String determineGuess(int computerNumber, int userAnswer, int plus, int minus, String sign) {
-        String comString = Integer.toString(computerNumber);
-        String usString = Integer.toString(userAnswer);
-        String[] comInt = new String[4];
-        String[] usInt = new String[4];
+    public static String determineGuess(int computerNumber, int userAnswer) {
+        String comString = toString(computerNumber);
+        String usString = toString(userAnswer);
+        int onPlace = 0;
+        int nonePlace = 0;
+        trynum++;
 
-        for (int i = 0; i < usString.length(); i++) {
-            char c = comString.charAt(i);
-            comInt[i] += c;
-            char h = usString.charAt(i);
-            usInt[i] += h;
-        }
+        for (int i = 0; i < 4; i++) {
+            if (comString.charAt(i) == usString.charAt(i)) {
+                onPlace++;
 
-        for (int s = 0; s < 4; s++) {
-            if (comInt[s] == usInt[s]) {
-                plus += 1;
-                sign += plus;
-            }
-        }//sign += "+";
-
-        for (int k = 1; k <= 4; k++) {
-            for (int j = 4 - k; j > 0; j--) {
-                if (comInt[j] == usInt[k]) {
-                    minus += -1;
-                    sign += minus;
+            } else {
+                for (int j = 0; j < 4; j++) {
+                    if (i != j &&
+                            comString.charAt(j) != comString.charAt(j) &&
+                            comString.charAt(i) == usString.charAt(j)) {
+                        nonePlace--;
+                    }
                 }
             }
         }
+        //System.out.printf("Number of tries: %d \n Com number: %s \n User number: %s", trynum, comString, usString);
 
-        return sign;
+        return String.format("+%d  %d", onPlace, nonePlace);
+    }
+
+    private static String toString(int num) {
+        String result = String.valueOf(num);
+        while (result.length() < 4) {
+            result = String.format("0%s", result);
+        }
+
+        return  result;
     }
 
     public static String define(int count){
-        if(count > 0 && count <= 6){
-            return "You are genius! :)";
-        }else if(count > 6 && count <= 10){
-            return "You are nearly genius :D";
+        String result = "";
+        if(count > 0 && count <= 8){
+            result = "You are genius! :)";
+        }else if(count > 8 && count <= 14){
+            result = "You are nearly genius :D";
         }else {
-            return "Very bad :(";
+            result ="Very bad :(";
         }
+
+        return String.format("%s \nNumber of tries: %d", result, trynum);
     }
 }
