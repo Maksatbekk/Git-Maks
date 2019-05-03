@@ -1,5 +1,6 @@
 package com.company;
 
+
 import javax.swing.*;
 
 public class GuessingGame {
@@ -26,21 +27,25 @@ public class GuessingGame {
 
         }
 
-        JOptionPane.showMessageDialog(null, ""+name+"!  "+define(count));
+        JOptionPane.showMessageDialog(null, " Dear " + name+"!  " + define(count));
 
     }
 
-    public static String determineGuess(int computerNumber, int userAnswer) 
+    public static String determineGuess(int computerNumber, int userAnswer)
     {
         String comString = toString(computerNumber);
-        
+
         String usString = toString(userAnswer);
-        
+
         int onPlace = 0;
-        
+
         int nonePlace = 0;
-        
+
         trynum++;
+
+        if (userAnswer <= 999 || userAnswer >= 10000){
+            return ("Invalid input!!!");
+        }
 
         for (int i = 0; i < 4; i++) {
             if (comString.charAt(i) == usString.charAt(i)) {
@@ -56,14 +61,14 @@ public class GuessingGame {
                 }
             }
         }
-
+        
         return String.format("+%d  %d", onPlace, nonePlace);
     }
 
     private static String toString(int num)
     {
         String result = String.valueOf(num);
-        
+
         while (result.length() < 4) {
             result = String.format("0%s", result);
         }
@@ -80,7 +85,7 @@ public class GuessingGame {
             result = "You are nearly genius :D";
         }
         else {
-            result ="Very bad :(";
+            result ="Very bad :(. You must try more!";
         }
 
         return String.format("%s \nNumber of tries: %d", result, trynum);
