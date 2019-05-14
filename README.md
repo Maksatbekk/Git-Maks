@@ -10,7 +10,8 @@ Name of the project:
 Purpose of the project:
 
 "In this project I tried to grow the intellegency of people.
-By using this project you can grow your thinking skills, your IQ."
+By using this project you can grow your thinking skills, your IQ.
+Because this project is proposed to grow the thinking skills of people."
 About the program:
 
 "In this program you will be given a four-digit number which is taken randomly by java compiler.
