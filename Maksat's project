@@ -12,12 +12,14 @@ public class GuessingGame {
 
         int userAnswer = 0;
 
+        String instruction_message = "Instructions";
+
         String instructions = ("Instructions of the game:\nThe rule of this game is very simple. You will be given a random number between 1000 and 10000.\n" +
                 "You should guess this number. But how? If a digit is at right place you will gain +1 per right guess.\n " +
                 "If your number's digit at wrong place you will gain -1.\n" + "If your guess is completely correct you will gain +4.\n" +
-                " If you ready, let's start the game.");
+                "If you ready, let's start the game.");
 
-        JOptionPane.showMessageDialog(null, instructions);
+        JOptionPane.showMessageDialog(null, instruction_message);
 
         int count = 1;
 
@@ -85,14 +87,14 @@ public class GuessingGame {
 
     public static String define(int count){
         String result = "";
-        if(count > 0 && count <= 8){
-            result = ("You are genius! :)");
+        if(count > 0 && count <= 10){
+            result = ("Your result is very good. You have very good IQ.");
         }
-        else if(count > 8 && count <= 14){
-            result = ("You are nearly genius :D");
+        else if(count > 8 && count <= 16){
+            result = ("Your result is not so so good. But, by practicing you can improve your results and IQ.");
         }
         else {
-            result = ("Very bad :(. You must try more!");
+            result = ("Your result is bad. You must try more and more.");
         }
 
         return (String.format("%s \nNumber of tries: %d", result, trynum));
