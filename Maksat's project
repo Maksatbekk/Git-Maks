@@ -1,4 +1,4 @@
-package com.company;
+//package com.company;
 
 
 import javax.swing.*;
@@ -11,6 +11,13 @@ public class GuessingGame {
         int computerNumber = (int) (Math.random()*8999 + 1000);
 
         int userAnswer = 0;
+
+        String instructions = ("Instructions of the game:\nThe rule of this game is very simple. You will be given a random number between 1000 and 10000.\n" +
+                "You should guess this number. But how? If a digit is at right place you will gain +1 per right guess.\n " +
+                "If your number's digit at wrong place you will gain -1.\n" + "If your guess is completely correct you will gain +4.\n" +
+                " If you ready, let's start the game.");
+
+        JOptionPane.showMessageDialog(null, instructions);
 
         int count = 1;
 
@@ -61,7 +68,7 @@ public class GuessingGame {
                 }
             }
         }
-        
+
         return String.format("+%d  %d", onPlace, nonePlace);
     }
 
