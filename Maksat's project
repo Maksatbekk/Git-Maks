@@ -12,6 +12,8 @@ public class GuessingGame {
 
         int userAnswer = 0;
 
+        System.out.println(computerNumber);
+
         String instruction_message = "Instructions";
 
         String instructions = ("Instructions of the game:\nThe rule of this game is very simple. You will be given a random number between 1000 and 10000.\n" +
@@ -19,7 +21,7 @@ public class GuessingGame {
                 "If your number's digit at wrong place you will gain -1.\n" + "If your guess is completely correct you will gain +4.\n" +
                 "If you ready, let's start the game.");
 
-        JOptionPane.showMessageDialog(null, instruction_message);
+        JOptionPane.showMessageDialog(null, instructions);
 
         int count = 1;
 
@@ -63,8 +65,8 @@ public class GuessingGame {
             } else {
                 for (int j = 0; j < 4; j++) {
                     if (i != j &&
-                            comString.charAt(j) != comString.charAt(j) &&
-                            comString.charAt(i) == usString.charAt(j)) {
+                            comString.charAt(i) == usString.charAt(j))
+                    {
                         nonePlace--;
                     }
                 }
