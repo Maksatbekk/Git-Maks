@@ -38,7 +38,7 @@ public class GuessingGame {
 
         }
 
-        JOptionPane.showMessageDialog(null, " Dear " + name+"!  " + define(count));
+        JOptionPane.showMessageDialog(null, "Dear " + name+"!  " + define(count));
 
     }
 
