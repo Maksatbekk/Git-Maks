@@ -6,7 +6,7 @@ import javax.swing.*;
 public class GuessingGame {
 
     private static int trynum = 0;
-    
+
     public static void main(String[] args) {
 
         int computerNumber = (int) (Math.random()*8999 + 1000);
@@ -57,8 +57,10 @@ public class GuessingGame {
             return ("Invalid input!!!");
         }
 
-        for (int i = 0; i < 4; i++) {
-            if (comString.charAt(i) == usString.charAt(i)) {
+        for (int i = 0; i < 4; i++)
+        {
+            if (comString.charAt(i) == usString.charAt(i))
+            {
                 onPlace++;
 
             } else {
@@ -72,7 +74,8 @@ public class GuessingGame {
             }
         }
 
-        return String.format("+%d  %d", onPlace, nonePlace);
+        return String.format("The number of right placed digits +%d\n" +
+                "The number of wrong placed digits %d\n" + "Try number: %d", onPlace, nonePlace, trynum);
     }
 
     private static String toString(int num)
@@ -86,15 +89,20 @@ public class GuessingGame {
         return  result;
     }
 
-    public static String define(int count){
+    public static String define(int count)
+    {
         String result = "";
-        if(count > 0 && count <= 10){
+
+        if(count > 0 && count <= 10)
+        {
             result = ("Your result is very good. You have very good IQ.");
         }
-        else if(count > 8 && count <= 16){
+        else if(count > 8 && count <= 16)
+        {
             result = ("Your result is not so so good. But, by practicing you can improve your results and IQ.");
         }
-        else {
+        else
+            {
             result = ("Your result is bad. You must try more and more.");
         }
 
